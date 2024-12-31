@@ -17,6 +17,8 @@ jobs:
               run: kubectl apply -f k8s/deployment.yml
             - name: Service
               run: kubectl apply -f k8s/service.yml
+            - name: Ingress
+              run: kubectl apply -f k8s/ingress.yml
             - name: Rollout
               run: kubectl rollout restart deployment/wordle
             - name: Wait

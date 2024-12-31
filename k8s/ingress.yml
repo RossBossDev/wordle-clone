@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordle-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: wordle.rossreicks.com
+    external-dns.alpha.kubernetes.io/target: home.rossreicks.com
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: wordle.rossreicks.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordle-service
+                port:
+                  number: 3000
