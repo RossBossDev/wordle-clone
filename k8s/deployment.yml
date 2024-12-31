@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordle
+  template:
+    metadata:
+      labels:
+        app: wordle
+    spec:
+      containers:
+      - name: wordle
+        image: rossreicks/wordle-clone:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
