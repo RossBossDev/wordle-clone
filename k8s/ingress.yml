@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   name: wordle-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: wordle.rossreicks.com
+    external-dns.alpha.kubernetes.io/hostname: wordle.rossboss.dev
     external-dns.alpha.kubernetes.io/target: home.rossreicks.com
 spec:
   ingressClassName: nginx
   rules:
-    - host: wordle.rossreicks.com
+    - host: wordle.rossboss.dev
       http:
         paths:
           - path: /
