@@ -6,6 +6,7 @@ interface LetterGridProps {
     cellSize?: number;
     guesses: string[];
     maxGuesses: number;
+    secretWord: string;
 }
 
 interface Cell {
@@ -13,18 +14,48 @@ interface Cell {
     status: 'correct' | 'incorrect' | 'present' | 'absent';
 }
 
-export function LetterGrid({ size, cellSize = 50, guesses, maxGuesses }: LetterGridProps) {
+export function LetterGrid({ size, cellSize = 50, guesses, maxGuesses, secretWord }: LetterGridProps) {
     const grid: Cell[] = React.useMemo(() => {
-        const paddedGuesses = [...guesses, ...Array(maxGuesses - guesses.length).fill('')];
+        // Create an array of empty strings to fill remaining guesses
+        const emptyGuesses = Array(maxGuesses - guesses.length).fill('');
 
-        return paddedGuesses.map((guess) =>
-            guess
-                .slice(0, size)
-                .padEnd(size, ' ')
-                .split('')
-                .map((letter: string) => ({ letter, status: !letter.trim() ? 'absent' : 'correct' })),
-        );
-    }, [guesses, size, maxGuesses]);
+        // Combine actual guesses with empty guesses to fill the grid
+        const paddedGuesses = [...guesses, ...emptyGuesses];
+
+        return paddedGuesses.map((guess) => {
+            // Process each guess into an array of Cell objects
+
+            // 1. First, ensure the guess isn't longer than the grid size
+            const truncatedGuess = guess.slice(0, size);
+
+            // 2. Pad shorter guesses with spaces to match grid size
+            const paddedGuess = truncatedGuess.padEnd(size, ' ');
+
+            // 3. Convert the string into an array of characters
+            const letters = paddedGuess.split('');
+
+            // 4. Transform each letter into a Cell object
+            return letters.map((letter: string, index: number) => {
+                const isLetterInSecretWord = secretWord.includes(letter);
+                const isLetterInCorrectPosition = secretWord[index] === letter;
+
+                let status = 'absent';
+
+                if (isLetterInCorrectPosition) {
+                    status = 'correct';
+                } else if (isLetterInSecretWord) {
+                    status = 'present';
+                } else if (letter.trim()) {
+                    status = 'incorrect';
+                }
+
+                return {
+                    letter,
+                    status,
+                };
+            });
+        });
+    }, [guesses, size, maxGuesses, secretWord]);
 
     return (
         <div
@@ -45,7 +76,7 @@ export function LetterGrid({ size, cellSize = 50, guesses, maxGuesses }: LetterG
                         'flex items-center justify-center bg-slate-200 rounded-md shadow',
                         'text-2xl font-bold text-slate-900',
                         cell.status === 'correct' && 'bg-green-500',
-                        cell.status === 'incorrect' && 'bg-red-500',
+                        cell.status === 'incorrect' && 'bg-slate-500',
                         cell.status === 'present' && 'bg-yellow-500',
                         cell.status === 'absent' && 'bg-slate-200',
                     )}

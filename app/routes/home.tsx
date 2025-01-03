@@ -10,11 +10,17 @@ export function meta({}) {
 export default function Index() {
     const [guesses, setGuesses] = useState<string[]>([]);
 
+    const SECRET_WORD = 'GUESSES';
+
+    const handleSubmit = (data: { guess: string }) => {
+        setGuesses((prev) => [...prev, data.guess]);
+    };
+
     return (
-        <div className="flex h-screen flex-col items-center justify-center">
+        <div className="flex h-screen flex-col items-center justify-center w-full max-w-screen-sm mx-auto">
             <h1 className="text-4xl font-bold mb-4 text-slate-900">Ross' Wordle</h1>
-            <LetterGrid size={5} maxGuesses={6} guesses={['GOLF', 'CAT']} />
-            <GuessForm />
+            <LetterGrid size={7} maxGuesses={6} guesses={guesses} secretWord={SECRET_WORD} />
+            <GuessForm size={7} onSubmit={handleSubmit} />
         </div>
     );
 }
