@@ -4,7 +4,7 @@ import { Form as RemixForm } from 'react-router';
 import { getValidatedFormData, useRemixForm } from 'remix-hook-form';
 import { z } from 'zod';
 import { Button } from '~/components/ui/button';
-import { FormControl, FormDescription, FormField, FormLabel, FormMessage } from '~/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormLabel, FormMessage } from '~/components/ui/form';
 import { FormItem } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 
@@ -37,22 +37,25 @@ export default function Index() {
 
     return (
         <RemixForm onSubmit={form.handleSubmit} className="space-y-8">
-            <FormField
-                control={form.control}
-                name="guess"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Guess</FormLabel>
-                        <FormControl>
-                            <Input placeholder="5 letter word" {...field} />
-                        </FormControl>
-                        <FormDescription>Make a guess</FormDescription>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+            <Form {...(form as any)}>
+                <FormField
+                    control={form.control}
+                    name="guess"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Guess</FormLabel>
+                            <FormControl>
+                                <Input placeholder="5 letter word" {...field} />
+                            </FormControl>
+                            <FormDescription>Make a guess</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
-            <Button type="submit">Submit</Button>
+                <Button type="submit">Submit</Button>
+            </Form>
         </RemixForm>
     );
 }

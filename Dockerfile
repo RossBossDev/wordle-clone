@@ -4,7 +4,7 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/go/dockerfile-reference/
 
-ARG NODE_VERSION=22.12.0
+ARG NODE_VERSION=22.9.0
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -15,7 +15,7 @@ WORKDIR /usr/src/app
 
 
 ################################################################################
-# Create a stage for installing production dependecies.
+# Create a stage for installing production dependencies.
 FROM base as deps
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
