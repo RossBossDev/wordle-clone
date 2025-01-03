@@ -1146,6 +1146,11 @@ colorette@^2.0.20:
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.20.tgz#9eb793e6833067f7235902fcd3b09917a000a95a"
   integrity sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
 
+commander@>=0.3.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-13.0.0.tgz#1b161f60ee3ceb8074583a0f95359a4f8701845c"
+  integrity sha512-oPYleIY8wmTVzkvQq10AEok6YcTC4sRUBl8F9gVuwchGVUCTbl/vhLTaQqutuuySYOsu8YTgV+OxKc/8Yvx+mQ==
+
 commander@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
@@ -2983,6 +2988,13 @@ update-browserslist-db@^1.1.1:
   dependencies:
     escalade "^3.2.0"
     picocolors "^1.1.0"
+
+urban@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/urban/-/urban-0.3.4.tgz#e5ddd7e822c2b914532da03bcb78b52feb8e7d64"
+  integrity sha512-9iDgt2Om6wUrQg9jvU3BwlwBotrXX7FgTy/RrInmtHsEYOCcnyQtp3WeCQ04N3TSJoz+7FOe/AsZrX+y8nVOJA==
+  dependencies:
+    commander ">=0.3.0"
 
 util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
