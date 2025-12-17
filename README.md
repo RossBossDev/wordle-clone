@@ -1,3 +1,3 @@
 # Wordle Clone
 
-Test 25
+Test 26
