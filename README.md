@@ -1,3 +1,3 @@
 # Wordle Clone
 
-Test 36
+Test 37
